@@ -1,9 +1,6 @@
 package com.carlos.ejercicio2compi1;
 import java.util.ArrayList;
 
-/**
-* This class is a simple example lexer.
-*/
 %%
 %class Lexer
 %unicode

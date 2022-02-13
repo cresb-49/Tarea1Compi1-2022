@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Caret;
 
 /**
  *
@@ -34,8 +36,6 @@ public class main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        PanelTexto = new javax.swing.JTextPane();
         jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -56,11 +56,11 @@ public class main extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        PanelTexto = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DETECTOR DE VOCALES Y ENTEROS");
-
-        jScrollPane1.setViewportView(PanelTexto);
 
         jButton1.setText("Analizar Texto");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +79,7 @@ public class main extends javax.swing.JFrame {
 
         FieldLinea.setEditable(false);
         FieldLinea.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        FieldLinea.setText("0");
+        FieldLinea.setText("1");
 
         jLabel4.setText("Palabras con 4 vocales:");
 
@@ -219,32 +219,49 @@ public class main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        PanelTexto.setColumns(20);
+        PanelTexto.setRows(5);
+        PanelTexto.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                PanelTextoCaretUpdate(evt);
+            }
+        });
+        PanelTexto.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                PanelTextoCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
+        jScrollPane3.setViewportView(PanelTexto);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
                         .addComponent(FieldLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(FieldColumna, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(FieldColumna, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
@@ -284,6 +301,24 @@ public class main extends javax.swing.JFrame {
     private void Field4VocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Field4VocalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Field4VocalActionPerformed
+
+    private void PanelTextoCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_PanelTextoCaretPositionChanged
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_PanelTextoCaretPositionChanged
+
+    private void PanelTextoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_PanelTextoCaretUpdate
+        // TODO add your handling code here:
+        try {
+            int caret = PanelTexto.getCaretPosition();
+            int linea = PanelTexto.getLineOfOffset(caret);
+            int columna = caret - PanelTexto.getLineStartOffset(linea);
+            this.FieldLinea.setText(String.valueOf(linea + 1));
+            this.FieldColumna.setText(String.valueOf(columna));
+        } catch (BadLocationException ex) {
+            System.out.println("Nuevo movimiento de carrete");
+        }
+    }//GEN-LAST:event_PanelTextoCaretUpdate
 
     /**
      * @param args the command line arguments
@@ -328,7 +363,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField Field5Vocal;
     private javax.swing.JTextField FieldColumna;
     private javax.swing.JTextField FieldLinea;
-    private javax.swing.JTextPane PanelTexto;
+    private javax.swing.JTextArea PanelTexto;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -340,8 +375,8 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 

@@ -41,25 +41,25 @@ import java.util.ArrayList;
     public void countWord(int vocalCont) {
         
         switch (vocalCont) {
-            case 1 -> {
+            case 1:
                 this.vocal1++;
-            }
-            case 2 -> {
+                break;
+            case 2:
                 this.vocal2++;
-            }
-            case 3 -> {
+                break;
+            case 3:
                 this.vocal3++;
-            }
-            case 4 -> {
+                break;
+            case 4:
                 this.vocal4++;
-            }
-            case 5 -> {
+                break;
+            case 5:
                 this.vocal5++;
-            }
-            default -> {
+                break;
+            default:
                 System.out.println("Cantidad de vocales sin interes");
-            }
         }
+
         this.vocalCont = 0;
     }
     
@@ -91,7 +91,7 @@ LineTerminator = \r|\n|\r\n
 WhiteSpace     = {LineTerminator} | [ \t\f]
 
 vocal = [AEIOUaeiou]
-consonant = [QWRTYPSDFGHJKLÑZXCVBNMqwrtypsdfghjklñzxcvbnm]
+consonant = [QWRTYPSDFGHJKL\u00d1ZXCVBNMqwrtypsdfghjkl\u00f1zxcvbnm]
 consonants = {consonant}+
 number = [0-9]
 numbers = {number}+

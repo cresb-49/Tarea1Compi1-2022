@@ -20,7 +20,7 @@ public class NewClass {
     private int vocal3 = 0;
     private int vocal4 = 0;
     private int vocal5 = 0;
-    
+
     public int getVocal1() {
         return vocal1;
     }
@@ -42,43 +42,41 @@ public class NewClass {
     }
 
     public void countWord(int vocalCont) {
-        
+
         switch (vocalCont) {
-            case 1 -> {
+            case 1:
                 this.vocal1++;
-            }
-            case 2 -> {
+                break;
+            case 2:
                 this.vocal2++;
-            }
-            case 3 -> {
+                break;
+            case 3:
                 this.vocal3++;
-            }
-            case 4 -> {
+                break;
+            case 4:
                 this.vocal4++;
-            }
-            case 5 -> {
+                break;
+            case 5:
                 this.vocal5++;
-            }
-            default -> {
+                break;
+            default:
                 System.out.println("Cantidad de vocales sin interes");
-            }
         }
+
         this.vocalCont = 0;
     }
-    
-    private void agregarEntero(NumerosEntero entero){
+
+    private void agregarEntero(NumerosEntero entero) {
         this.numerosEnteros.add(entero);
-        
+
     }
-    
-    private void reiniciarLista(){
+
+    private void reiniciarLista() {
         this.numerosEnteros.clear();
     }
 
     public ArrayList<NumerosEntero> getNumerosEnteros() {
         return numerosEnteros;
     }
-    
-    
 
 }
